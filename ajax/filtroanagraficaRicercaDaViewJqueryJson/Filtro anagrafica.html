@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="vendor/jquery/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        //$("#idTableAnagrafica")  -> puntatore alla tabella
+        //equivale a window.onLoad
+        $(document).ready(
+            //puntatore a funzione anonima
+            function(){
+                //sarebbe come $.ajax
+                //$.get(url, callback)
+                //data: stringa del json, status: http code status
+                $.get("anagrafica.json", function(data, status){
+                     //var vNomi = JSON.parse(data);
+                     creaTabella(data);
+                    //console.log("vNomi: " + vNomi);
+                    console.log("data: " + data);
+                    console.log("status: " + status);
+
+
+                });
+
+                $("#btn1").click(function(){
+                    var nome = document.getElementById("inputNome").value;
+                    var cognome = document.getElementById("inputCognome").value;
+                    var tabella = document.getElementById("idTableAnagrafica");
+                    //$(this).closest('tr').find('td:first').text() prende la prima cella
+                    //$(this).text() prende la riga
+                    var x=0;
+                    $('#idTableAnagrafica tr').each(function(){
+                        console.log($(this).html());
+                        if(x!=0){
+                            if($(this).closest('tr').find('td:first').text() == nome || $(this).closest('tr').find('td:second').text() == cognome ){
+                                console.log($(this).closest('tr').find('td:first').text());
+                                $('#idTableAnagrafica2').append($(this).html());
+                            }
+                        }
+                        x++;
+                        
+                    });
+
+
+                });
+
+
+            });
+
+            //manipolazione del DOM
+            function creaTabella(objVector){
+                //var divTabella = $("#idTableAnagrafica");   -> puntatore alla tabella
+
+                //creo intestazione tabella
+                headerTable = $(    "<tr>" +
+                                    "<td>Cognome</td><td>Nome</td><td>Eta</td>"+
+                                    "</tr>");
+                                //appendo al tag con l'id="idTableAnagrafica" la tabella
+                $("#idTableAnagrafica").append(headerTable);
+
+
+                for(var cntRiga = 0; cntRiga <objVector.length; cntRiga++){
+                    //creo tre reference agli oggetti jquery
+                    cognomeTd = $("<td>" + objVector[cntRiga].cognome + "</td>");  
+                    nomeTd = $("<td>" + objVector[cntRiga].nome + "</td>");  
+                    etaTd = $("<td>" + objVector[cntRiga].eta + "</td>"); 
+                    //li appendo alla righe
+                    rowTr = $("<tr></tr>");
+                    rowTr.append(cognomeTd, nomeTd, etaTd);
+                    //ora appendo la riga alla tabella, essendo gia stata appesa all'elemento HTML appendiamo a quel elemento
+                    $("#idTableAnagrafica").append(rowTr);
+                }
+            }
+
+
+
+
+    </script>
+    <script></script>
+</head>
+
+<body>
+    <div >
+        <table id="idTableAnagrafica" border="1"></table>
+        <label >Nome:</label> <input type="text" name="" id="inputNome">
+        <label>Cognome:</label> <input type="text" name="" id="inputCognome">
+        <button id="btn1">Cerca</button>
+
+        <table id="idTableAnagrafica2" border="1">
+                <tr>
+                        <td>Cognome</td>
+                        <td>Nome</td>
+                        <td>Eta</td>
+                    </tr>
+        </table>
+        <!--table>
+            <tr>
+                <td>Cognome</td>
+                <td>Nome</td>
+                <td>Eta</td>
+            </tr>
+            <tr>
+                <td>Rossi</td>
+                <td>Marco</td>
+                <td>20</td>
+
+
+            </tr>
+        </table-->
+
+
+    </div>
+    
+</body>
+
+
+</html>

@@ -1,0 +1,30 @@
+<!-- My document -->
+<HTML>
+<HEAD>
+  <TITLE>My Document</TITLE>
+  <SCRIPT>
+    //<H1 id="idTitolo" >
+    
+    function fDelay() {
+      console.log("Ho chiamato fOnload()");
+      var h1Handler = document.getElementById("idTitolo");
+      h1Handler.innerHTML="Hello world!!";
+    }
+    
+    function fOnLoad(){
+        setTimeout(fDelay, 4000 );
+    }
+    
+    console.log("Sono nel main");
+    //attiva la fOnload, SENZA TONDE!!!
+    // solo dopo caricamento pagina web
+    window.onload=fOnLoad;
+  </SCRIPT>
+</HEAD>
+<BODY>
+  <H1 id="idTitolo" >Header</H1>
+  <P>
+    Paragraph
+  </P>
+</BODY>
+</HTML>

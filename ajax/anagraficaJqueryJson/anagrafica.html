@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<script src="vendor/jquery/jquery-3.4.1.js"></script>
+		<link rel="stylesheet" href="css/style.css">
+		<script>
+			//$("#idTableAnagrafica") -> puntatore al div
+			
+			//equivale a window.onload=paginaCaricata
+			//	function paginaCaricata()
+			$(document).ready(
+				//puntatore a funzione anonima
+				function(){
+					//$.get(url, callback)
+					//data: jsonString
+					//status: httpCodeStatus
+					$.get("anagrafica.json", function(data, status){
+						console.log("data: " + data);
+						console.log("status: " + status);
+						//var vNomi = JSON.parse(data);
+						//creaTabella(vNomi);
+						creaTabella(data);
+						//console.log("vNomi: " + vNomi);
+					});
+
+				}
+			);
+
+			//Manipolazione DOM
+			function creaTabella(objVector){
+				//$("#idTableAnagrafica") puntatore a divTabella
+				//creo intestazione tabella
+				headerTr=$("<tr>" +
+							  "<td>Cognome</td><td>Nome</td><td>Eta</td>"+
+							  "</tr>");
+				$("#idTableAnagrafica").append(headerTr);
+
+				for(var cntRiga=0; cntRiga<objVector.length; cntRiga++){
+					//creo tre reference agli oggetti jquery
+					cognomeTd=$("<td>"+ objVector[cntRiga].cognome +"</td>");
+					nomeTd=$("<td>"+ objVector[cntRiga].nome +"</td>");
+					etaTd=$("<td>"+ objVector[cntRiga].eta +"</td>");
+					//li appendo alla riga
+					rowTr=$("<tr></tr>");
+					rowTr.append(cognomeTd, nomeTd, etaTd);
+					//
+					$("#idTableAnagrafica").append(rowTr);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<table id="idTableAnagrafica">
+
+			</table>
+			<!--table border="1" >
+				<tr>
+					<td>Cognome</td>
+					<td>Nome</td>
+					<td>Eta</td>
+				</tr>
+				<tr>
+					<td>Rossi</td>
+					<td>Marco</td>
+					<td>18</td>
+				</tr>
+			</table-->
+		</div>
+	</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="demo">
+<h2>XMLHttpRequest Json Object</h2>
+<!--button type="button" onclick="loadDoc()">Change Content</button-->
+<p id="oggetto"></p>
+</div>
+
+<script>
+  var xhttp = new XMLHttpRequest();
+  //Prima di svolgere la send, indicare come gestire la response
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      strJson = this.responseText;
+      obj = JSON.parse(strJson);
+      console.log(obj.nome + "   " + obj.cognome);
+	    //console.log("this.responseText: " + this.responseText)
+      document.getElementById("oggetto").innerHTML = obj.nome + " " + obj.cognome;
+    }else {
+      document.getElementById("oggetto").innerHTML ="server off";
+    }
+  };
+  //"GET" indica la modalità di passaggio dei parametri
+  //true indica la modalità di invocazione della chimata (true:asincrona, non obbligatorio)
+  xhttp.open("GET", "http://localhost:80/Allievi/allievi.json", true);
+  xhttp.send();
+  //xhttp.open("GET", "ajax_info.txt", true);
+
+</script>
+
+</body>
+</html>

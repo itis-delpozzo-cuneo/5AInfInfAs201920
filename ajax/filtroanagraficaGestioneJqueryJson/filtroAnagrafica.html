@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="vendor/jquery/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        var vAnagrafica;
+        //$("#idTableAnagrafica")  -> puntatore alla tabella
+        //equivale a window.onLoad
+        $(document).ready(
+            //puntatore a funzione anonima
+            function(){
+                //sarebbe come $.ajax
+                //$.get(url, callback)
+                //data: stringa del json, status: http code status
+                $.get("anagrafica.json", function(data, status){
+                     //var vNomi = JSON.parse(data);
+                     vAnagrafica=data;
+                     creaTabella(data);
+                    //console.log("vNomi: " + vNomi);
+                    console.log("data: " + data);
+                    console.log("status: " + status);
+                });
+
+                $("#btnFiltra").click(function(){
+                    var nome = document.getElementById("inputNome").value;
+                    var cognome = document.getElementById("inputCognome").value;
+                    var tabellaFiltrata = document.getElementById("idTableAnagrafica2");
+                    //$(this).closest('tr').find('td:first').text() prende la prima cella
+                    //$(this).text() prende la riga
+                    //vAnagraficaFiltrata = Array();
+                    for(var cntAllievo=0 ; cntAllievo< vAnagrafica.length ; cntAllievo++){
+                        allievoFound = 0;
+                        if( cognome!="" && vAnagrafica[cntAllievo].cognome == cognome){
+                            allievoFound=1;
+                        }
+                        if( nome!="" && vAnagrafica[cntAllievo].nome == nome){
+                            allievoFound=1;
+                        }
+                        if(allievoFound==1){
+                            //creo tre reference agli oggetti jquery
+                            cognomeTd = $("<td>" + vAnagrafica[cntAllievo].cognome + "</td>");  
+                            nomeTd = $("<td>" + vAnagrafica[cntAllievo].nome + "</td>");  
+                            etaTd = $("<td>" + vAnagrafica[cntAllievo].eta + "</td>"); 
+                            //li appendo alla righe
+                            rowTr = $("<tr></tr>");
+                            rowTr.append(cognomeTd, nomeTd, etaTd);
+                            //ora appendo la riga alla tabella, essendo gia stata appesa all'elemento HTML appendiamo a quel elemento
+                            $("#idTableAnagrafica2").append(rowTr);
+                        }
+                    }
+
+                    
+                    /* var x=0;
+                    $('#idTableAnagrafica tr').each(function(){
+                        console.log($(this).html());
+                        if(x!=0){
+                            if($(this).closest('tr').find('td:first').text() == nome || $(this).closest('tr').find('td:second').text() == cognome ){
+                                console.log($(this).closest('tr').find('td:first').text());
+                                $('#idTableAnagrafica2').append($(this).html());
+                            }
+                        }
+                        x++;
+                        
+                    }); */
+
+
+                });
+
+
+            });
+
+            //manipolazione del DOM
+            function creaTabella(objVector){
+                //var divTabella = $("#idTableAnagrafica");   -> puntatore alla tabella
+
+                //creo intestazione tabella
+                headerTable = $(    "<tr>" +
+                                    "<td>Cognome</td><td>Nome</td><td>Eta</td>"+
+                                    "</tr>");
+                                //appendo al tag con l'id="idTableAnagrafica" la tabella
+                $("#idTableAnagrafica").append(headerTable);
+
+
+                for(var cntRiga = 0; cntRiga <objVector.length; cntRiga++){
+                    //creo tre reference agli oggetti jquery
+                    cognomeTd = $("<td>" + objVector[cntRiga].cognome + "</td>");  
+                    nomeTd = $("<td>" + objVector[cntRiga].nome + "</td>");  
+                    etaTd = $("<td>" + objVector[cntRiga].eta + "</td>"); 
+                    //li appendo alla righe
+                    rowTr = $("<tr></tr>");
+                    rowTr.append(cognomeTd, nomeTd, etaTd);
+                    //ora appendo la riga alla tabella, essendo gia stata appesa all'elemento HTML appendiamo a quel elemento
+                    $("#idTableAnagrafica").append(rowTr);
+                }
+            }
+
+
+
+
+    </script>
+    <script></script>
+</head>
+
+<body>
+    <div >
+        <table id="idTableAnagrafica" border="1"></table>
+            <label>Cognome:</label> <input type="text" name="" value="Rossi" id="inputCognome">
+            <label>Nome:</label> <input type="text" name="" value="Marco" id="inputNome">
+            <button id="btnFiltra">Filtra</button>
+
+            <table id="idTableAnagrafica2" border="1">
+                    <tr>
+                        <td>Cognome</td>
+                        <td>Nome</td>
+                        <td>Eta</td>
+                    </tr>
+            </table>
+            <!--table>
+                <tr>
+                    <td>Cognome</td>
+                    <td>Nome</td>
+                    <td>Eta</td>
+                </tr>
+                <tr>
+                    <td>Rossi</td>
+                    <td>Marco</td>
+                    <td>20</td>
+
+
+                </tr>
+            </table-->
+    </div>
+    
+</body>
+
+
+</html>
