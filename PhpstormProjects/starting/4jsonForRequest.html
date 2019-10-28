@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Chiamata al webservice</title>
+
+    </head>
+    <body>
+        <!-- form: invio di informazioni al server -->
+        <!-- devo invocare un url, specificata dall'attributo action,
+                con il metodo GET -->
+        <!-- url sarà così formata:
+            action + "?" + name1 + value1 + "&" + name1 + value1 -->
+        <!-- il tutto avviene alla pressione di un bottone "submit" -->
+        <form name="f1" action="4jsonForRequest.php" method="GET" >
+            Limite inferiore:<input type="text" name="key1" value="11"/><br>
+            Limite superiore:<input type="text" name="key2" value="21"/><br>
+            <input type="submit" name="btnInvia" value="Invia" />
+        </form>
+    </body>
+</html>
