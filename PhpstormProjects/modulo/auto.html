@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Modelli auto</title>
+</head>
+<body>
+    <form name="f1" action="inserisciAuto.php" method="POST">
+        <h1>Auto</h1>
+        Cognome:&nbsp;<input type="text" name="cognome" value="cognome1" /></br>
+        Nome:&nbsp;<input type="text" name="nome" value="nome1" /></br>
+        Email:&nbsp;<input type="email" name="email" value="autosalone@fiat.it" /></br>
+        Password:&nbsp;<input type="password" name="password" value="daIndovinare" /></br>
+        Marca:&nbsp;
+        <select name="marca">
+			<option value="-1"/>--seleziona--</option>
+            <option value="1"/>BMW</option>
+            <option value="2" selected/>FIAT</option>
+            <option value="3"/>RENAULT</option>
+        </select><br>
+        Tipo modello:&nbsp;
+        <input type="radio" name="modello" value="1" />Berlina&nbsp;
+        <input type="radio" name="modello" value="2" checked/>Spider&nbsp;
+        <input type="radio" name="modello" value="3"/>Suv</br>
+        Optional:
+        <input type="checkbox" name="optional[]" value="1"/>ABS&nbsp;
+        <input type="checkbox" name="optional[]" value="2" checked />Clima&nbsp;
+        <input type="checkbox" name="optional[]" value="3"/>Bluetooth&nbsp;
+        <input type="checkbox" name="optional[]" value="4" checked/>Navigatore&nbsp;
+        <input type="checkbox" name="optional[]" value="5"/>Cruise control</br>
+        Immagine:&nbsp;<input type="file" name="nomeFile"/></br>
+        <input type="submit" name="bInvia" value="invia" />
+    </form>
+</body>
+</html>
