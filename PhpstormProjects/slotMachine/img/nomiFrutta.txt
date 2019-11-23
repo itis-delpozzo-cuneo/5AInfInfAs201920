@@ -1,0 +1,14 @@
+ Il volume nell'unit… C non ha etichetta.
+ Numero di serie del volume: 4C7E-297D
+
+ Directory di C:\xampp\htdocs\SlotMachine\img
+
+23/11/2019  08:48    <DIR>          .
+23/11/2019  08:48    <DIR>          ..
+18/11/2019  12:46            10.865 anguria.jfif
+18/11/2019  12:49            25.192 baccello.jpg
+18/11/2019  12:45             6.544 banana.jfif
+18/11/2019  12:46           260.108 ciliegia.jpg
+23/11/2019  08:48                 0 nomiFrutta.txt
+               5 File        302.709 byte
+               2 Directory  142.525.079.552 byte disponibili
